@@ -91,8 +91,9 @@ fn main() {
             println!("cargo:rustc-link-lib=c++");
         }
         "linux" => {
-            // Link C++ standard library (libstdc++ on Linux)
-            println!("cargo:rustc-link-lib=stdc++");
+            // Link against C++ standard library specified in environment variable CXXSTDLIB
+            // or libstdc++ if the environment variable is not set
+            println!("cargo:rustc-link-lib={}", env::var("CXXSTDLIB").unwrap_or("stdc++".to_string()));
             // Link dynamic loader (needed for VST3 module loading)
             println!("cargo:rustc-link-lib=dl");
         }
