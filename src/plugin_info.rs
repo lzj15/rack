@@ -1,7 +1,8 @@
+use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
 /// Information about a discovered audio plugin
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PluginInfo {
     /// Plugin name (e.g., "AUGraphicEQ")
     pub name: String,
@@ -23,7 +24,7 @@ pub struct PluginInfo {
 }
 
 /// Type of audio plugin
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum PluginType {
     /// Audio effect (processes audio input to output)
     Effect,
@@ -79,7 +80,7 @@ impl std::fmt::Display for PluginInfo {
 }
 
 /// Information about a plugin parameter
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ParameterInfo {
     /// Parameter index
     pub index: usize,
@@ -102,14 +103,7 @@ pub struct ParameterInfo {
 
 impl ParameterInfo {
     /// Create a new ParameterInfo
-    pub fn new(
-        index: usize,
-        name: String,
-        min: f32,
-        max: f32,
-        default: f32,
-        unit: String,
-    ) -> Self {
+    pub fn new(index: usize, name: String, min: f32, max: f32, default: f32, unit: String) -> Self {
         Self {
             index,
             name,

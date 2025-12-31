@@ -22,6 +22,7 @@ exclude = [
 smallvec = "1.13"
 thiserror = "2.0"
 cpal = { version = "0.15", optional = true }
+serde = { version = "1.0.228", features = ["derive"] }
 
 [build-dependencies]
 cmake = "0.1"
